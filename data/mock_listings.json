@@ -1,0 +1,25 @@
+{
+  "listings": [
+    {
+      "id": "mock-1",
+      "address": "123 Oak St, Irvine, CA",
+      "price": 850000,
+      "listed_at": "2025-02-25T10:00:00Z",
+      "source": "mock"
+    },
+    {
+      "id": "mock-2",
+      "address": "456 Elm Ave, Costa Mesa, CA",
+      "price": 720000,
+      "listed_at": "2025-02-24T14:30:00Z",
+      "source": "mock"
+    },
+    {
+      "id": "mock-3",
+      "address": "789 Pine Rd, Santa Ana, CA",
+      "price": 620000,
+      "listed_at": "2025-02-23T09:00:00Z",
+      "source": "mock"
+    }
+  ]
+}
