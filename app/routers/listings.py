@@ -14,6 +14,15 @@ router = APIRouter(prefix="/listings", tags=["listings"])
 DEFAULT_ZCTAS = ["92618", "92626", "92701", "92606", "92801", "92660"]
 INGESTED_PATH = DATA_DIR / "ingested_listings.json"
 
+ZIP_CENTERS = {
+    "92618": [33.64, -117.79],
+    "92626": [33.64, -117.91],
+    "92701": [33.74, -117.87],
+    "92606": [33.69, -117.83],
+    "92801": [33.83, -117.96],
+    "92660": [33.62, -117.93],
+}
+
 
 def _zctas_from_rules() -> list[str]:
     path = DATA_DIR / "risk_rules.json"
@@ -46,9 +55,11 @@ def _save_ingested(listings: list[dict]) -> None:
 
 
 def _area_to_listing(area: dict, risk: dict) -> dict:
-    return {
-        "id": area["zcta"],
-        "address": area.get("name") or f"ZIP {area['zcta']}",
+    zcta = area["zcta"]
+    coords = ZIP_CENTERS.get(zcta)
+    out = {
+        "id": zcta,
+        "address": area.get("name") or f"ZIP {zcta}",
         "price": area.get("median_home_value"),
         "population": area.get("population"),
         "owner_occupied_units": area.get("owner_occupied_units"),
@@ -61,6 +72,9 @@ def _area_to_listing(area: dict, risk: dict) -> dict:
             "explanation": risk["explanation"],
         },
     }
+    if coords:
+        out["lat"], out["lng"] = coords
+    return out
 
 
 def _ingested_to_listing(row: dict) -> dict:
@@ -84,15 +98,21 @@ def list_listings(
     zip_code: str | None = Query(None),
     limit: int = Query(20, ge=1, le=100),
 ):
-    ingested = [_ingested_to_listing(r) for r in _load_ingested()]
+    try:
+        ingested = [_ingested_to_listing(r) for r in _load_ingested()]
+    except Exception:
+        ingested = []
     zctas = [zip_code] if zip_code else _zctas_from_rules()
     zctas = zctas[: max(0, limit - len(ingested))]
     for z in zctas:
-        area = fetch_acs5_for_zcta(z)
-        if not area:
+        try:
+            area = fetch_acs5_for_zcta(z)
+            if not area:
+                continue
+            risk = compute_risk(zip_code=z)
+            ingested.append(_area_to_listing(area, risk))
+        except Exception:
             continue
-        risk = compute_risk(zip_code=z)
-        ingested.append(_area_to_listing(area, risk))
     return {"listings": ingested[:limit], "source": "U.S. Census Bureau ACS 5-Year (2022) + ingested"}
 
 
