@@ -14,7 +14,7 @@ export default function Alerts() {
     setMessage(null)
     try {
       const res = await subscribeAlerts(email || undefined, phone || undefined, zip || undefined)
-      setMessage(res.ok ? 'Signup received (stub — wire Twilio/Resend later).' : res.message)
+      setMessage(res.ok ? res.message : res.message)
     } catch (err) {
       setMessage(err instanceof Error ? err.message : 'Request failed')
     } finally {
@@ -26,26 +26,26 @@ export default function Alerts() {
     <>
       <h1>Early access alerts</h1>
       <p style={{ color: 'var(--muted)', marginTop: '0.5rem' }}>
-        Get notified when new listings hit. Stub — wire Twilio (SMS) or Resend (email) later.
+        Get notified by SMS (free) and/or email. At least one required. US/Canada only for SMS.
       </p>
       <form onSubmit={handleSubmit} style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: 320 }}>
         <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{ padding: '0.5rem 0.75rem', border: '1px solid var(--border)', borderRadius: 'var(--radius)' }}
-        />
-        <input
           type="tel"
-          placeholder="Phone (SMS)"
+          placeholder="Phone (10-digit, optional)"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           style={{ padding: '0.5rem 0.75rem', border: '1px solid var(--border)', borderRadius: 'var(--radius)' }}
         />
         <input
+          type="email"
+          placeholder="Email (optional)"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ padding: '0.5rem 0.75rem', border: '1px solid var(--border)', borderRadius: 'var(--radius)' }}
+        />
+        <input
           type="text"
-          placeholder="ZIP code"
+          placeholder="ZIP code (optional)"
           value={zip}
           onChange={(e) => setZip(e.target.value)}
           style={{ padding: '0.5rem 0.75rem', border: '1px solid var(--border)', borderRadius: 'var(--radius)' }}
@@ -54,6 +54,9 @@ export default function Alerts() {
           {loading ? 'Submitting…' : 'Subscribe'}
         </button>
       </form>
+      <p style={{ fontSize: '0.875rem', color: 'var(--muted)', marginTop: '0.5rem' }}>
+        SMS: free via FreeTxtAPI (no signup). Email: add RESEND_API_KEY for confirmation.
+      </p>
       {message && <p style={{ marginTop: '1rem', color: 'var(--muted)' }}>{message}</p>}
     </>
   )

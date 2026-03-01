@@ -3,6 +3,7 @@ import { getRiskScore } from '../api'
 import type { RiskResponse } from '../api'
 
 export default function Dashboard() {
+  const [address, setAddress] = useState('123 Oak St, Irvine, CA')
   const [risk, setRisk] = useState<RiskResponse | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -12,7 +13,7 @@ export default function Dashboard() {
     setError(null)
     setRisk(null)
     try {
-      const res = await getRiskScore()
+      const res = await getRiskScore(address.trim() || undefined)
       setRisk(res)
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Request failed')
@@ -25,8 +26,22 @@ export default function Dashboard() {
     <>
       <h1>Corporate Acquisition Risk Score</h1>
       <p style={{ color: 'var(--muted)', marginTop: '0.5rem' }}>
-        See institutional activity signals. Stub data for now — wire real entity/cash/concentration logic later.
+        Enter an address or city to see risk score and AI-generated explanation.
       </p>
+      <input
+        type="text"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+        placeholder="e.g. 123 Oak St, Irvine, CA"
+        style={{
+          marginTop: '1rem',
+          width: '100%',
+          maxWidth: 400,
+          padding: '0.5rem 0.75rem',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius)',
+        }}
+      />
       <button
         onClick={handleCheck}
         disabled={loading}

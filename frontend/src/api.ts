@@ -20,8 +20,23 @@ export async function getRiskScore(address?: string): Promise<RiskResponse> {
   return res.json();
 }
 
-export async function getListings(): Promise<{ listings: Array<{ id: string; address: string; price?: number }> }> {
-  const res = await fetch(`${API_BASE}/listings`);
+export type ListingItem = {
+  id: string;
+  address: string;
+  price?: number;
+  population?: number;
+  owner_occupied_units?: number;
+  renter_occupied_units?: number;
+  source?: string;
+  risk?: { score: number; label: string; explanation?: string };
+};
+
+export async function getListings(params?: { zip_code?: string; limit?: number }): Promise<{ listings: ListingItem[]; source?: string }> {
+  const search = new URLSearchParams();
+  if (params?.zip_code) search.set('zip_code', params.zip_code);
+  if (params?.limit != null) search.set('limit', String(params.limit));
+  const qs = search.toString();
+  const res = await fetch(`${API_BASE}/listings${qs ? `?${qs}` : ''}`);
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }

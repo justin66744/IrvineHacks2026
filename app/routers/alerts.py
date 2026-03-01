@@ -1,6 +1,7 @@
-"""Alert subscription — SMS/email. Stub for first commit."""
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
+
+from app.alert_service import subscribe
 
 router = APIRouter(prefix="/alerts", tags=["alerts"])
 
@@ -9,16 +10,11 @@ class SubscribeRequest(BaseModel):
     email: str | None = None
     phone: str | None = None
     zip_code: str | None = None
-    listing_id: str | None = None
 
 
 @router.post("/subscribe")
-def subscribe(req: SubscribeRequest):
-    """Stub: would send via Twilio (SMS) or Resend/Brevo (email). Not implemented."""
-    return {
-        "ok": True,
-        "message": "Alert signup not yet implemented. Wire Twilio/Resend here.",
-        "email": req.email,
-        "phone": req.phone,
-        "zip_code": req.zip_code,
-    }
+def subscribe_alerts(req: SubscribeRequest):
+    ok, message = subscribe(email=req.email, phone=req.phone, zip_code=req.zip_code)
+    if not ok:
+        raise HTTPException(status_code=400, detail=message)
+    return {"ok": True, "message": message, "email": req.email, "phone": req.phone, "zip_code": req.zip_code}

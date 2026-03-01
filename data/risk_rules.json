@@ -1,0 +1,90 @@
+{
+  "default": {
+    "score": 4,
+    "label": "Moderate corporate acquisition risk",
+    "signals": [
+      "Limited institutional data for this area",
+      "Consider signing up for alerts when new listings match your criteria"
+    ],
+    "properties_owned": null,
+    "all_cash": null,
+    "related_entities": null,
+    "explanation_fallback": "This area has moderate visibility into institutional activity. Early alerts can help local buyers compete when new listings appear."
+  },
+  "92618": {
+    "score": 8,
+    "label": "High corporate acquisition risk",
+    "signals": [
+      "Repeat institutional buyer activity in this ZIP",
+      "All-cash purchases above area average",
+      "Multiple LLC/entity acquisitions in past 12 months",
+      "Concentration of non-owner-occupant purchases"
+    ],
+    "properties_owned": 24,
+    "all_cash": true,
+    "related_entities": 8,
+    "explanation_fallback": "This ZIP shows elevated institutional activity. Families may face faster-moving all-cash and entity buyers. Early access alerts can help you react when new listings hit the market."
+  },
+  "92626": {
+    "score": 6,
+    "label": "Moderate-high corporate acquisition risk",
+    "signals": [
+      "Above-average all-cash share in neighborhood",
+      "Several repeat buyers in ZIP",
+      "Entity ownership concentration trending up"
+    ],
+    "properties_owned": 12,
+    "all_cash": true,
+    "related_entities": 4,
+    "explanation_fallback": "Institutional and all-cash activity is notable here. Getting notified as soon as listings go live can give local buyers a better chance to compete."
+  },
+  "92701": {
+    "score": 5,
+    "label": "Moderate corporate acquisition risk",
+    "signals": [
+      "Some repeat and entity buying in area",
+      "All-cash share near metro average"
+    ],
+    "properties_owned": 7,
+    "all_cash": false,
+    "related_entities": 2,
+    "explanation_fallback": "This area has moderate institutional presence. Early alerts for new listings can help owner-occupants stay ahead."
+  },
+  "92606": {
+    "score": 3,
+    "label": "Lower corporate acquisition risk",
+    "signals": [
+      "Lower concentration of entity buyers in this ZIP",
+      "Owner-occupant share above area average"
+    ],
+    "properties_owned": 2,
+    "all_cash": false,
+    "related_entities": 1,
+    "explanation_fallback": "Institutional activity is relatively lower here. Alerts can still help you move quickly when homes you want come on the market."
+  },
+  "92801": {
+    "score": 7,
+    "label": "High corporate acquisition risk",
+    "signals": [
+      "High all-cash and investor activity in ZIP",
+      "Multiple entities with 10+ properties",
+      "Repeat acquisitions in same neighborhood"
+    ],
+    "properties_owned": 18,
+    "all_cash": true,
+    "related_entities": 6,
+    "explanation_fallback": "This neighborhood sees strong institutional demand. Families should consider early-access alerts to get a fair shot at new listings."
+  },
+  "92660": {
+    "score": 5,
+    "label": "Moderate corporate acquisition risk",
+    "signals": [
+      "Mixed owner-occupant and investor activity",
+      "All-cash share near regional average"
+    ],
+    "properties_owned": 6,
+    "all_cash": false,
+    "related_entities": 2,
+    "explanation_fallback": "Institutional activity is moderate here. Early alerts can help you act quickly when new listings match your criteria."
+  }
+}

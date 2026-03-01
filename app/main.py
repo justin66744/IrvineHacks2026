@@ -1,8 +1,7 @@
-"""First-Mover Alert API — corporate acquisition risk, alerts, transparency."""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import alerts, assistance, health, listings, risk
+from app.routers import alerts, assistance, health, listings, metrics, risk
 
 app = FastAPI(
     title="First-Mover Alert API",
@@ -21,3 +20,4 @@ app.include_router(listings.router)
 app.include_router(risk.router)
 app.include_router(alerts.router)
 app.include_router(assistance.router)
+app.include_router(metrics.router)

@@ -1,4 +1,3 @@
-"""Health and info."""
 from fastapi import APIRouter
 
 router = APIRouter(tags=["health"])
@@ -16,9 +15,12 @@ def root():
         "description": "Corporate acquisition risk score, early access alerts, assistance match.",
         "docs": "/docs",
         "endpoints": [
-            "GET /listings — listing ingestion (stub)",
-            "POST /risk/score — corporate acquisition risk score (stub)",
-            "POST /alerts/subscribe — alert signup (stub)",
-            "GET /assistance — assistance match (stub)",
+            "GET /listings",
+            "POST /listings/ingest",
+            "GET /listings/{id}",
+            "POST /risk/score",
+            "POST /alerts/subscribe",
+            "GET /assistance",
+            "GET /metrics",
         ],
     }
