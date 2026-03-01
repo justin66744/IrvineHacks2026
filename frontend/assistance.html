@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equity Guardian | Assistance</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .assistance-search-form { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 1rem 0; }
+    .assistance-search-form input { padding: 0.6rem 0.75rem; border: 1px solid var(--line); border-radius: var(--radius-md); }
+    .assistance-error { color: var(--coral); margin: 0.5rem 0; }
+    .assistance-program-list { margin-top: 1.5rem; display: grid; gap: 1rem; }
+    .assistance-program-list.loading { opacity: 0.7; }
+    .assistance-card { padding: 1rem; background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--line); }
+    .assistance-card a { color: var(--blue); }
+    .assistance-empty { color: var(--muted); }
+  </style>
+</head>
+<body data-page="assistance">
+  <div class="plain-frame page-assistance">
+    <header class="site-header plain-header">
+      <a class="brand" href="index.html">
+        <span class="brand-badge">EG</span>
+        <span class="brand-copy">
+          <strong>Equity Guardian</strong>
+          <small>Housing transparency for families</small>
+        </span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="risk-score.html">Risk Score</a>
+        <a href="listings.html">Listings</a>
+        <a href="alerts.html">Alerts</a>
+        <a href="assistance.html">Assistance</a>
+      </nav>
+    </header>
+
+    <main class="plain-page reveal-on-scroll">
+      <section class="plain-content">
+        <p class="eyebrow">Family support</p>
+        <h1>HUD housing counselors</h1>
+        <p class="hero-subtle">Find free housing counseling agencies near you. Data from the U.S. Department of Housing and Urban Development.</p>
+
+        <form id="assistance-form" class="assistance-search-form">
+          <input type="text" name="city" placeholder="City (optional)" aria-label="City">
+          <input type="text" name="state" placeholder="State (e.g. CA)" value="CA" aria-label="State">
+          <button type="submit" class="button button-primary">Search</button>
+        </form>
+        <p id="assistance-error" class="assistance-error" role="alert"></p>
+        <div id="assistance-programs" class="assistance-program-list">
+          <p>Loading…</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+  <script src="api.js"></script>
+</body>
+</html>

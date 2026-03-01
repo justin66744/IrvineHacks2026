@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equity Guardian | Alerts</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .alerts-signup-form { display: flex; flex-direction: column; gap: 0.75rem; max-width: 360px; margin-top: 1rem; }
+    .alerts-signup-form input { padding: 0.6rem 0.75rem; border: 1px solid var(--line); border-radius: var(--radius-md); }
+    .alerts-message { margin-top: 1rem; min-height: 1.5em; }
+  </style>
+</head>
+<body data-page="alerts">
+  <div class="plain-frame page-alerts">
+    <header class="site-header plain-header dark-nav">
+      <a class="brand" href="index.html">
+        <span class="brand-badge">EG</span>
+        <span class="brand-copy">
+          <strong>Equity Guardian</strong>
+          <small>Housing transparency for families</small>
+        </span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="risk-score.html">Risk Score</a>
+        <a href="listings.html">Listings</a>
+        <a href="alerts.html">Alerts</a>
+        <a href="assistance.html">Assistance</a>
+      </nav>
+    </header>
+
+    <main class="plain-page dark-page reveal-on-scroll">
+      <section class="plain-content light-content">
+        <p class="eyebrow dark">Stay ahead</p>
+        <h1>Early access alerts</h1>
+        <p class="hero-subtle light-copy">Get notified by SMS or email when new high-risk listings match your area. At least one of email or phone required.</p>
+
+        <form id="alerts-form" class="alerts-signup-form">
+          <input type="email" name="email" placeholder="Email" aria-label="Email">
+          <input type="tel" name="phone" placeholder="Phone (10 digits, optional)" aria-label="Phone">
+          <input type="text" name="zip_code" placeholder="ZIP code (optional)" aria-label="ZIP code">
+          <button type="submit" class="button button-primary">Subscribe</button>
+        </form>
+        <p id="alerts-message" class="alerts-message" role="status"></p>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+  <script src="api.js"></script>
+</body>
+</html>

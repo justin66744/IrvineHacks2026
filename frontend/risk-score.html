@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Equity Guardian | Risk Score</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .risk-search-form { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .risk-search-form input { flex: 1; min-width: 200px; padding: 0.6rem 0.75rem; border: 1px solid var(--line); border-radius: var(--radius-md); }
+    .risk-result.loading { opacity: 0.7; pointer-events: none; }
+    .risk-error { color: var(--coral); margin-bottom: 0.5rem; }
+  </style>
 </head>
 <body data-page="risk">
   <div class="page-glow glow-a"></div>
@@ -30,12 +36,17 @@
     <main class="risk-intel-page">
       <section class="risk-intel-header reveal-on-scroll">
         <p class="eyebrow">Neighborhood Risk Intelligence</p>
-        <h1>Eastview, Irvine</h1>
-        <h2>Risk Score: 8.2 / 10</h2>
-        <p class="risk-status">High Investor Activity</p>
-        <p class="risk-summary">
-          Elevated LLC and all-cash acquisition activity is outpacing regional norms, increasing competition for owner-occupant buyers.
-        </p>
+        <form id="risk-form" class="risk-search-form">
+          <input type="text" id="risk-address" placeholder="Address or city, e.g. Irvine, CA or 92618" value="123 Oak St, Irvine, CA" aria-label="Address or ZIP">
+          <button type="submit" class="button button-primary">Get risk score</button>
+        </form>
+        <div id="risk-result" class="risk-result">
+          <p id="risk-result-error" class="risk-error" role="alert"></p>
+          <h1 id="risk-result-location">Enter an address above</h1>
+          <h2>Risk Score: <span id="risk-result-score">—</span></h2>
+          <p class="risk-status" id="risk-result-label">—</p>
+          <p class="risk-summary" id="risk-result-summary">Use the form to see corporate acquisition risk and an AI explanation for this area.</p>
+        </div>
       </section>
 
       <section class="intel-map-shell reveal-on-scroll">
@@ -181,5 +192,6 @@
     </main>
   </div>
   <script src="app.js"></script>
+  <script src="api.js"></script>
 </body>
 </html>
