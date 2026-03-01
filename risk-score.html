@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equity Guardian | Risk Score</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="risk">
+  <div class="page-glow glow-a"></div>
+  <div class="page-glow glow-b"></div>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-badge">EG</span>
+        <span class="brand-copy">
+          <strong>Equity Guardian</strong>
+          <small>Housing transparency for families</small>
+        </span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="risk-score.html">Risk Score</a>
+        <a href="listings.html">Listings</a>
+        <a href="alerts.html">Alerts</a>
+        <a href="assistance.html">Assistance</a>
+      </nav>
+    </header>
+
+    <main class="risk-intel-page">
+      <section class="risk-intel-header reveal-on-scroll">
+        <p class="eyebrow">Neighborhood Risk Intelligence</p>
+        <h1>Eastview, Irvine</h1>
+        <h2>Risk Score: 8.2 / 10</h2>
+        <p class="risk-status">High Investor Activity</p>
+        <p class="risk-summary">
+          Elevated LLC and all-cash acquisition activity is outpacing regional norms, increasing competition for owner-occupant buyers.
+        </p>
+      </section>
+
+      <section class="intel-map-shell reveal-on-scroll">
+        <div class="intel-map-stage">
+          <iframe
+            class="intel-map-frame"
+            title="Eastview Irvine neighborhood map"
+            src="https://www.google.com/maps?q=Eastview+Irvine+CA&z=14&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+
+          <button class="map-risk-marker owner marker-a" type="button">
+            <span class="sr-only">Owner occupied property</span>
+            <span class="marker-card">
+              14 Willow Bend
+              <small>Owner-occupied · Stable</small>
+            </span>
+          </button>
+
+          <button class="map-risk-marker owner marker-b" type="button">
+            <span class="sr-only">Owner occupied property</span>
+            <span class="marker-card">
+              22 Park Glen
+              <small>Owner-occupied · Family-owned</small>
+            </span>
+          </button>
+
+          <button class="map-risk-marker llc marker-c" type="button">
+            <span class="sr-only">LLC purchased property</span>
+            <span class="marker-card">
+              48 Maple Terrace
+              <small>LLC purchase · All-cash close</small>
+            </span>
+          </button>
+
+          <button class="map-risk-marker llc marker-d" type="button">
+            <span class="sr-only">LLC purchased property</span>
+            <span class="marker-card">
+              61 Cedar View
+              <small>LLC purchase · Repeat buyer</small>
+            </span>
+          </button>
+
+          <button class="cluster-marker cluster-one" type="button">
+            <span>6</span>
+            <span class="marker-card">
+              North block cluster
+              <small>6 investor-linked purchases</small>
+            </span>
+          </button>
+
+          <button class="cluster-marker cluster-two" type="button">
+            <span>4</span>
+            <span class="marker-card">
+              South block cluster
+              <small>4 investor-linked purchases</small>
+            </span>
+          </button>
+
+          <aside class="intel-overlay-panel">
+            <div class="overlay-section">
+              <h3>Breakdown</h3>
+              <div class="metric-stack">
+                <div class="metric-bar-row">
+                  <div class="metric-bar-head">
+                    <span>LLC Purchases</span>
+                    <strong>62%</strong>
+                  </div>
+                  <div class="flat-progress-track">
+                    <span class="flat-progress-fill fill-62"></span>
+                  </div>
+                </div>
+                <div class="metric-bar-row">
+                  <div class="metric-bar-head">
+                    <span>All-Cash Offers</span>
+                    <strong>48%</strong>
+                  </div>
+                  <div class="flat-progress-track">
+                    <span class="flat-progress-fill fill-48"></span>
+                  </div>
+                </div>
+                <div class="metric-bar-row">
+                  <div class="metric-bar-head">
+                    <span>Repeat Investors</span>
+                    <strong>71%</strong>
+                  </div>
+                  <div class="flat-progress-track">
+                    <span class="flat-progress-fill fill-71"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="overlay-section">
+              <h3>Investor Activity Over Time</h3>
+              <div class="mini-line-chart">
+                <div class="line-chart-grid"></div>
+                <svg viewBox="0 0 360 170" aria-label="Investor trend mini chart">
+                  <polyline
+                    class="chart-line investor-line"
+                    points="16,132 62,126 108,112 154,96 200,80 246,64 292,48 344,32"
+                  ></polyline>
+                  <polyline
+                    class="chart-line family-line"
+                    points="16,124 62,118 108,110 154,102 200,94 246,88 292,84 344,80"
+                  ></polyline>
+                </svg>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="risk-lower-section reveal-on-scroll">
+        <div class="section-title-row">
+          <h3>Top Institutional Buyers in This Area</h3>
+        </div>
+        <div class="buyer-listing">
+          <div class="buyer-line">
+            <span>Sunset Holdings LLC</span>
+            <strong>18 properties</strong>
+          </div>
+          <div class="buyer-line">
+            <span>Arrow Capital</span>
+            <strong>12 properties</strong>
+          </div>
+          <div class="buyer-line">
+            <span>Evergreen Trust</span>
+            <strong>9 properties</strong>
+          </div>
+          <div class="buyer-line">
+            <span>Bright Homes LLC</span>
+            <strong>7 properties</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="risk-cta reveal-on-scroll">
+        <h3>Stay Ahead of Market Changes</h3>
+        <a class="button button-primary" href="alerts.html">Enable Alerts</a>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
