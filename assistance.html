@@ -31,7 +31,14 @@
         <h1>$120,000 in buyer assistance is available</h1>
         <p class="hero-subtle">Stay competitive with grant support, lower-cost financing, and first-time buyer credits.</p>
 
-        <div class="inline-band light-band">
+        <form class="assistance-search-row" id="assistance-search-form">
+          <input id="assistance-city" type="text" placeholder="City" value="Irvine">
+          <input id="assistance-state" type="text" placeholder="State" value="CA" maxlength="2">
+          <button class="button button-primary" type="submit">Find Programs</button>
+        </form>
+        <p class="api-status" id="assistance-status"></p>
+
+        <div class="inline-band light-band" id="assistance-summary">
           <div>
             <span class="band-label">Homebuyer Grant</span>
             <strong>Up to $80K</strong>
@@ -45,6 +52,8 @@
             <strong>$15K</strong>
           </div>
         </div>
+
+        <div class="assistance-program-list" id="assistance-program-list"></div>
 
         <a class="button button-primary" href="index.html">Get Pre-Matched</a>
       </section>

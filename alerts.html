@@ -31,13 +31,20 @@
         <h1>Recent Activity</h1>
         <p class="hero-subtle light-copy">A simple live read of new investor activity and why those purchases were flagged.</p>
 
+        <form class="subscribe-row" id="alerts-subscribe-form">
+          <input id="alerts-email" type="email" placeholder="Email for alerts">
+          <input id="alerts-zip" type="text" placeholder="ZIP code" value="92618">
+          <button class="button button-primary" type="submit">Enable Alerts</button>
+        </form>
+        <p class="api-status light-copy" id="alerts-subscribe-status"></p>
+
         <div class="pill-line">
           <button class="filter-pill active" type="button">All</button>
           <button class="filter-pill" type="button">High Risk</button>
           <button class="filter-pill" type="button">New</button>
         </div>
 
-        <div class="linear-list light-list">
+        <div class="linear-list light-list" id="alerts-feed">
           <div class="linear-row">
             <span>Sunset Holdings LLC</span>
             <span>456 Maple St</span>

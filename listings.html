@@ -30,19 +30,19 @@
     <main class="listings-page">
       <section class="listings-topbar reveal-on-scroll">
         <div class="listings-search">
-          <input type="text" value="Eastview, Irvine" aria-label="Search listings">
+          <input id="listings-search-input" type="text" value="92618" aria-label="Search listings">
         </div>
         <div class="listings-filters">
-          <select><option>Price Range</option><option>$500k-$900k</option><option>$900k+</option></select>
-          <select><option>Risk Level</option><option>Low</option><option>Moderate</option><option>High</option></select>
-          <select><option>Days on Market</option><option>0-7</option><option>8-30</option></select>
-          <select><option>Buyer Type</option><option>Any</option><option>LLC Nearby</option><option>High Cash Activity</option></select>
+          <select id="filter-price"><option value="">Price Range</option><option value="500000-900000">$500k-$900k</option><option value="900000-999999999">$900k+</option></select>
+          <select id="filter-risk"><option value="">Risk Level</option><option value="Low">Low</option><option value="Moderate">Moderate</option><option value="High">High</option></select>
+          <select id="filter-days"><option value="">Days on Market</option><option value="0-7">0-7</option><option value="8-30">8-30</option></select>
+          <select id="filter-buyer"><option value="">Buyer Type</option><option value="llc">LLC Nearby</option><option value="cash">High Cash Activity</option></select>
         </div>
       </section>
 
       <section class="listings-split reveal-on-scroll">
         <div class="listings-column">
-          <div class="listing-scroll">
+          <div class="listing-scroll" id="listing-results">
             <article class="listing-shell" data-map-target="listing-pin-a">
               <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80" alt="456 Maple St exterior">
               <div class="listing-shell-body">
@@ -109,6 +109,7 @@
         <div class="listings-map-column">
           <div class="listings-map-stage">
             <iframe
+              id="listings-map-frame"
               class="listings-map-frame"
               title="Eastview Irvine listings map"
               src="https://www.google.com/maps?q=Eastview+Irvine+CA&z=14&output=embed"

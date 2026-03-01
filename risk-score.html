@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Equity Guardian | Risk Score</title>
   <link rel="stylesheet" href="styles.css">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  >
 </head>
 <body data-page="risk">
   <div class="page-glow glow-a"></div>
@@ -28,73 +34,31 @@
     </header>
 
     <main class="risk-intel-page">
-      <section class="risk-intel-header reveal-on-scroll">
+      <section class="risk-intel-header reveal-on-scroll" data-risk-address="Eastview, Irvine">
         <p class="eyebrow">Neighborhood Risk Intelligence</p>
-        <h1>Eastview, Irvine</h1>
-        <h2>Risk Score: 8.2 / 10</h2>
-        <p class="risk-status">High Investor Activity</p>
-        <p class="risk-summary">
+        <h1 id="risk-location">Eastview, Irvine</h1>
+        <h2 id="risk-score-text">Risk Score: 8.2 / 10</h2>
+        <p class="risk-status" id="risk-label-text">High Investor Activity</p>
+        <p class="risk-summary" id="risk-summary-text">
           Elevated LLC and all-cash acquisition activity is outpacing regional norms, increasing competition for owner-occupant buyers.
         </p>
+
+        <form class="risk-search-row" id="risk-search-form">
+          <input id="risk-search-input" type="text" value="Eastview, Irvine" placeholder="Enter address, city, or ZIP">
+          <button class="button button-primary" type="submit">Analyze Location</button>
+        </form>
       </section>
 
       <section class="intel-map-shell reveal-on-scroll">
-        <div class="intel-map-stage">
-          <iframe
-            class="intel-map-frame"
-            title="Eastview Irvine neighborhood map"
-            src="https://www.google.com/maps?q=Eastview+Irvine+CA&z=14&output=embed"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+        <div class="risk-layer-bar">
+          <label class="layer-toggle"><input type="checkbox" id="toggle-llc" checked> LLC Purchases</label>
+          <label class="layer-toggle"><input type="checkbox" id="toggle-cash" checked> All-Cash Activity</label>
+          <label class="layer-toggle"><input type="checkbox" id="toggle-repeat" checked> Repeat Investors</label>
+          <label class="layer-toggle"><input type="checkbox" id="toggle-trend" checked> Trend Overlay</label>
+        </div>
 
-          <button class="map-risk-marker owner marker-a" type="button">
-            <span class="sr-only">Owner occupied property</span>
-            <span class="marker-card">
-              14 Willow Bend
-              <small>Owner-occupied · Stable</small>
-            </span>
-          </button>
-
-          <button class="map-risk-marker owner marker-b" type="button">
-            <span class="sr-only">Owner occupied property</span>
-            <span class="marker-card">
-              22 Park Glen
-              <small>Owner-occupied · Family-owned</small>
-            </span>
-          </button>
-
-          <button class="map-risk-marker llc marker-c" type="button">
-            <span class="sr-only">LLC purchased property</span>
-            <span class="marker-card">
-              48 Maple Terrace
-              <small>LLC purchase · All-cash close</small>
-            </span>
-          </button>
-
-          <button class="map-risk-marker llc marker-d" type="button">
-            <span class="sr-only">LLC purchased property</span>
-            <span class="marker-card">
-              61 Cedar View
-              <small>LLC purchase · Repeat buyer</small>
-            </span>
-          </button>
-
-          <button class="cluster-marker cluster-one" type="button">
-            <span>6</span>
-            <span class="marker-card">
-              North block cluster
-              <small>6 investor-linked purchases</small>
-            </span>
-          </button>
-
-          <button class="cluster-marker cluster-two" type="button">
-            <span>4</span>
-            <span class="marker-card">
-              South block cluster
-              <small>4 investor-linked purchases</small>
-            </span>
-          </button>
+        <div class="intel-map-stage" id="risk-map-stage">
+          <div id="risk-map-canvas" class="intel-map-canvas" aria-label="Interactive neighborhood risk map"></div>
 
           <aside class="intel-overlay-panel">
             <div class="overlay-section">
@@ -103,28 +67,28 @@
                 <div class="metric-bar-row">
                   <div class="metric-bar-head">
                     <span>LLC Purchases</span>
-                    <strong>62%</strong>
+                    <strong id="risk-metric-llc-value">62%</strong>
                   </div>
                   <div class="flat-progress-track">
-                    <span class="flat-progress-fill fill-62"></span>
+                    <span class="flat-progress-fill fill-62" id="risk-metric-llc-bar"></span>
                   </div>
                 </div>
                 <div class="metric-bar-row">
                   <div class="metric-bar-head">
                     <span>All-Cash Offers</span>
-                    <strong>48%</strong>
+                    <strong id="risk-metric-cash-value">48%</strong>
                   </div>
                   <div class="flat-progress-track">
-                    <span class="flat-progress-fill fill-48"></span>
+                    <span class="flat-progress-fill fill-48" id="risk-metric-cash-bar"></span>
                   </div>
                 </div>
                 <div class="metric-bar-row">
                   <div class="metric-bar-head">
                     <span>Repeat Investors</span>
-                    <strong>71%</strong>
+                    <strong id="risk-metric-repeat-value">71%</strong>
                   </div>
                   <div class="flat-progress-track">
-                    <span class="flat-progress-fill fill-71"></span>
+                    <span class="flat-progress-fill fill-71" id="risk-metric-repeat-bar"></span>
                   </div>
                 </div>
               </div>
@@ -136,10 +100,12 @@
                 <div class="line-chart-grid"></div>
                 <svg viewBox="0 0 360 170" aria-label="Investor trend mini chart">
                   <polyline
+                    id="risk-investor-line"
                     class="chart-line investor-line"
                     points="16,132 62,126 108,112 154,96 200,80 246,64 292,48 344,32"
                   ></polyline>
                   <polyline
+                    id="risk-family-line"
                     class="chart-line family-line"
                     points="16,124 62,118 108,110 154,102 200,94 246,88 292,84 344,80"
                   ></polyline>
@@ -147,6 +113,24 @@
               </div>
             </div>
           </aside>
+
+          <aside class="risk-detail-drawer" id="risk-detail-drawer" aria-hidden="true">
+            <button class="drawer-close" type="button" id="risk-drawer-close">Close</button>
+            <p class="eyebrow">Market Detail</p>
+            <h3 id="risk-drawer-title">High Investor Concentration</h3>
+            <p class="drawer-kicker" id="risk-drawer-detail">North Block Cluster</p>
+            <p class="drawer-meta" id="risk-drawer-meta">Last 90 days</p>
+            <p class="drawer-body" id="risk-drawer-body">
+              12 LLC purchases, 6 all-cash acquisitions, top buyer: Sunset Holdings LLC.
+            </p>
+            <a class="button button-secondary" href="listings.html">View flagged listings in this zone</a>
+          </aside>
+        </div>
+
+        <div class="risk-timeline-row">
+          <span>Jan</span>
+          <input id="risk-timeline-slider" type="range" min="1" max="12" value="12">
+          <span id="risk-timeline-label">Present</span>
         </div>
       </section>
 
@@ -175,11 +159,16 @@
       </section>
 
       <section class="risk-cta reveal-on-scroll">
-        <h3>Stay Ahead of Market Changes</h3>
+        <h3>Want alerts when this changes?</h3>
         <a class="button button-primary" href="alerts.html">Enable Alerts</a>
       </section>
     </main>
   </div>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
   <script src="app.js"></script>
 </body>
 </html>
